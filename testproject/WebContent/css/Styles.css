@@ -1,0 +1,43 @@
+a:link {
+	font-family: Tahoma, Arial, Verdana;
+	font-size: 11px;
+	font-weight: normal;
+}
+a:Visited {
+	font-family: Tahoma, Arial, Verdana;
+	font-size: 11px;	
+	font-weight: normal;
+}
+a:hover {
+	font-family: Tahoma, Arial, Verdana;
+	font-size: 11px;
+	font-weight: normal;
+	text-decoration: none;
+}
+a:active {
+	font-family: Tahoma, Arial, Verdana;
+	font-size: 11px;
+	font-weight: normal;
+}
+#dropmenudiv{
+position:absolute;
+background-color: #F0F5F0;
+border:#990000 1px solid;
+border-bottom-width: 0;
+font:normal 12px Verdana;
+line-height:18px;
+z-index:100;
+}
+#dropmenudiv a{
+width: 100%;
+display: block;
+text-indent: 3px;
+border-bottom:#990000 1px solid;
+color: #990000 ;
+padding: 1px 0;
+text-decoration: none;
+}
+#dropmenudiv a:hover{ /*hover background color*/
+	background-color: #990000;
+	color: #FFFFFF;
+}

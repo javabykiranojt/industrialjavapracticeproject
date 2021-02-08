@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context path="dmall" debug="1" reloadable="true" > 
+	<Resource name="jdbc/dmall"
+              type="javax.sql.DataSource" 
+              factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/kdtesting123"
+              username="root" 
+              password="root" 
+              maxActive="15"
+          maxIdle="3"
+          maxWait="5000"
+          removeAbandoned="true"
+          removeAbandonedTimeout="20"
+          logAbandoned="true"
+          validationQuery="select 1"
+          minEvictableIdleTimeMillis="3600000"
+          timeBetweenEvictionRunsMillis="1800000"
+          numTestsPerEvictionRun="10"
+          testWhileIdle="true"
+          testOnBorrow="true"
+          testOnReturn="false"/> 
+</Context>

@@ -1,0 +1,1 @@
+ALTER TABLE `clients` ADD COLUMN `docname` VARCHAR(45) AFTER `docId`;

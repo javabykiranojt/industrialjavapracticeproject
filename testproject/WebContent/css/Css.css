@@ -1,0 +1,530 @@
+/* CSS Document */
+body {
+	background-color: #ba8f75;
+	margin: 0px 0px 0px 0px;
+	margin-bottom: 0em
+}
+
+.maindatry {
+	margin: 0px 0px 0px 0px;
+	font-family: Arial;
+	font-size: 11px;
+	color: #ff0000;
+	font-weight: bold;
+}
+
+.bigHdgBlk {
+	font-family: Arial;
+	font-size: 16px;
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold;
+}
+
+.maintable {
+	width: 770px;
+}
+
+.header {
+	font-family: Arial;
+	font-size: 18px;
+	text-decoration: none;
+	color: #e55c11;
+}
+
+.tdBgClr {
+	background-color: #e55c11;
+}
+
+.lighthdg {
+	font-family: Arial;
+	font-size: 11px;
+	color: #999999;
+	text-decoration: none;
+}
+
+.ImgtxtUp {
+	font-family: Arial;
+	font-size: 11px;
+	color: #999999;
+	text-decoration: underline;
+}
+
+.ImgtxtUp1 {
+	font-family: Arial;
+	font-size: 11px;
+	color: black;
+	text-decoration: none;
+}
+
+.ImgtxtUpBlk {
+	font-family: Arial;
+	font-size: 11px;
+	color: #000000;
+	text-decoration: underline;
+}
+
+.ImgtxtDown {
+	font-family: Arial;
+	font-size: 11px;
+	text-decoration: underline;
+	font-weight: normal;
+	color: #F7EDE6;
+}
+
+.tblHdgWht {
+	font-family: Arial;
+	font-size: 11px;
+	text-decoration: none;
+	color: #dddddd;
+	background: #ba8f75;
+	font-weight: bold;
+	border-width: 1px;
+	border-color: #ba8f75;
+	border-style: solid;
+}
+
+.tblHdgWht1 {
+	font-family: Arial;
+	font-size: 11px;
+	text-decoration: none;
+	color: #dddddd;
+	background: #ba8f75;
+	padding-left: 5px;
+	font-weight: bold;
+	border-width: 1px;
+	border-color: #ba8f75;
+	border-style: solid;
+}
+
+.lognHdg {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #990000;
+	font-weight: bold;
+}
+
+.tblHdg {
+	font-family: Arial;
+	font-size: 11px;
+	text-decoration: none;
+	color: #433A3A;
+	font-weight: bold;
+}
+
+.tblDta {
+	font-family: Arial;
+	font-size: 11px;
+	text-decoration: '';
+	color: #433A3A;
+	font-weight: normal;
+}
+
+.tblDta1 {
+	font-family: Arial;
+	font-size: 11px;
+	text-decoration: none;
+	color: #433A3A;
+	font-weight: normal;
+	padding: 5px;
+}
+
+.text {
+	font-family: Arial;
+	font-size: 11px;
+	text-decoration: none;
+}
+
+.title1 {
+	font-family: Verdana, Arial bold;
+	font-size: 10px;
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold
+}
+
+.bodybold {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 11px;
+	COLOR: #000000;
+	FONT-FAMILY: Arial
+}
+
+.form {
+	BORDER-RIGHT: #BDBDBD thin solid;
+	BORDER-TOP: #BDBDBD thin solid;
+	FONT-SIZE: 10px;
+	BORDER-LEFT: #BDBDBD thin solid;
+	WIDTH: auto;
+	padding-left: 2px;
+	BORDER-BOTTOM: #BDBDBD thin solid;
+	FONT-FAMILY: Tahoma;
+	BACKGROUND-COLOR: #FFFFFF;
+}
+
+.listForm {
+	BORDER-RIGHT: #BDBDBD thin solid;
+	BORDER-TOP: #BDBDBD thin solid;
+	FONT-SIZE: 9px;
+	BORDER-LEFT: #BDBDBD thin solid;
+	WIDTH: auto;
+	BORDER-BOTTOM: #BDBDBD thin solid;
+	FONT-FAMILY: Verdana;
+	BACKGROUND-COLOR: #FFFFFF;
+}
+
+.dateForm {
+	BORDER-RIGHT: #BDBDBD thin solid;
+	BORDER-TOP: #BDBDBD thin solid;
+	FONT-SIZE: 10px;
+	BORDER-LEFT: #BDBDBD thin solid;
+	WIDTH: auto;
+	BORDER-BOTTOM: #BDBDBD thin solid;
+	FONT-FAMILY: Tahoma;
+	BACKGROUND-COLOR: #FFFFFF;
+	TEXT-ALIGN: center
+}
+
+.button {
+	font-family: Arial;
+	font-size: 11px;
+	color: #443636;
+	background-color: #ffffff;
+	font-weight: bold;
+	width: 100px;
+	height: 35px;
+}
+
+.button100 {
+	font-family: Arial;
+	font-size: 11px;
+	color: #443636;
+	background-color: #ffffff;
+	font-weight: bold;
+	width: 100px;
+}
+
+.button75 {
+	font-family: Arial;
+	font-size: 11px;
+	color: #443636;
+	background-color: #ffffff;
+	font-weight: bold;
+	width: 75px;
+}
+
+.button60 {
+	font-family: Arial;
+	font-size: 11px;
+	color: #443636;
+	background-color: #ffffff;
+	font-weight: bold;
+	width: 60px;
+}
+
+.button50 {
+	font-family: Arial;
+	font-size: 11px;
+	color: #443636;
+	background-color: #ffffff;
+	font-weight: bold;
+	width: 50px;
+}
+
+.bottom {
+	font-family: Arial;
+	font-size: 11px;
+	color: #F7EDE6;
+	text-decoration: underline;
+	font-weight: normal;
+}
+
+.bottom1 {
+	font-family: Arial;
+	font-size: 11px;
+	color: #F7EDE6;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.divautoflow {
+	vertical-align: middle;
+	overflow: auto;
+	vertical-align: middle;
+}
+
+.a:link {
+	text-decoration: underline;
+	color: #ffffff
+}
+
+.a:visited {
+	text-decoration: none;
+	color: #ffffff
+}
+
+.a:hover {
+	text-decoration: none;
+	color: #ffffff
+}
+
+a.sortlink:link {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #433A3A
+}
+
+a.sortlink:visited {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #433A3A
+}
+
+a.sortlink:hover {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #433A3A
+}
+
+a.sortlink:active {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #433A3A
+}
+
+a.hlink:link {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #433A3A
+}
+
+a.hlink:visited {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #433A3A
+}
+
+a.hlink:hover {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #433A3A
+}
+
+a.hlink:active {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #433A3A
+}
+
+a.hlinkwht:link {
+	text-decoration: none;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #ffffff
+}
+
+a.hlinkwht:visited {
+	text-decoration: none;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #ffffff
+}
+
+a.hlinkwht:hover {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #ffffff
+}
+
+a.hlinkwht:active {
+	text-decoration: none;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #ffffff
+}
+
+a.lognhlink:link {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #990000
+}
+
+a.lognhlink:visited {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #990000
+}
+
+a.lognhlink:hover {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #990000
+}
+
+a.lognhlink:active {
+	text-decoration: underline;;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #990000
+}
+
+.iframecss {
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+	border-collapse: collapse;
+	border-spacing: 0px;
+	WIDTH: auto;
+}
+
+#modalContainer {
+	background-color: transparent;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	z-index: 10000;
+}
+
+#alertBox {
+	position: relative;
+	width: 300px;
+	min-height: 100px;
+	margin-top: 50px;
+	border: 2px solid #000;
+	background-color: #F2F5F6;
+	background-image: url(alert.png);
+	background-repeat: no-repeat;
+	background-position: 20px 30px;
+}
+
+#modalContainer>#alertBox {
+	position: fixed;
+}
+
+#alertBox h1 {
+	margin: 0;
+	font: bold 0.9em verdana, arial;
+	background-color: #78919B;
+	color: #FFF;
+	border-bottom: 1px solid #000;
+	padding: 2px 0 2px 5px;
+}
+
+#alertBox p {
+	font: 0.7em verdana, arial;
+	height: 50px;
+	padding-left: 5px;
+	margin-left: 55px;
+}
+
+#alertBox #closeBtn {
+	display: block;
+	position: relative;
+	margin: 5px auto;
+	padding: 3px;
+	border: 1px solid #000;
+	width: 70px;
+	font: 0.7em verdana, arial;
+	text-transform: uppercase;
+	text-align: center;
+	color: #FFF;
+	background-color: #78919B;
+	text-decoration: none;
+}
+
+.default_alertWindow {
+	border: 2px solid #000000;
+	/* this is the border around the alert window */
+}
+
+.default_titleBar { /* title bar settings */
+	color: #ffffff;
+	font: 10px Verdana;
+	border-bottom: 1px solid #000000;
+	/* the bottom border of your title bar, the border that separates it from the content area */
+	background: #336699;
+	line-height: 16px;
+	/* if you have an icon, you probably want to set this as the same size or a bit larger than the icon size */
+	padding: 5px;
+}
+
+.default_titleBarLeftIcon { /* left icon settings */
+	background: transparent url(information.png) no-repeat;
+	width: 16px;
+	height: 16px;
+}
+
+.default_titleBarRightIcon { /* right icon settings */
+	/* background: transparent url(/icons/cancel.png) no-repeat;
+	width: 16px;
+	height: 16px; */
+	
+}
+
+.default_contentArea {
+	/* the contente area, where the actual message text is shown */
+	color: #000000;
+	font: 14px Verdana;
+	overflow: auto;
+	/* setting this to auto will make scrollbars appear if the message text is too long for the height attribute, assuming you set it */
+	padding: 5px;
+	background: #e7ebef;
+	/* your background color.  the button area background color should be set the same as well */
+}
+
+.default_buttonArea {
+	/* the button area, the div that your buttons are placed into */
+	text-align: right;
+	/* if you want you buttons to the left or center of the alert box, change this setting */
+	background: #e7ebef;
+	/* your background color.  the content area background color should be set the same as well */
+	padding-bottom: 5px;
+}
+
+.default_okButton { /* ok button settings */
+	background: url(images/accept.png);
+	padding-left: 15px;
+	margin-right: 5px;
+	background-repeat: no-repeat;
+	background-position: center left;
+	height: 35px;
+}
+
+.default_cancelButton { /* cancel button settings, if present */
+	background: url(images/cancel.png);
+	padding-left: 15px;
+	margin-right: 5px;
+	background-repeat: no-repeat;
+	background-position: center left;
+	height: 35px;
+}

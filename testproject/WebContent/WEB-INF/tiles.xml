@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout"
+		template="/common/baseLayout.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header" value="/common/header.jsp"></put-attribute>
+		<put-attribute name="menuDropDown" value=""></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+		<put-attribute name="footer" value="/common/footer.jsp"></put-attribute>
+
+	</definition>
+
+	<definition name="popUp" template="/common/popUpLayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<definition name="userRegistration" extends="baseLayout"></definition>
+
+	<!-- @@@@@@ For Admin Module @@@@@@ -->
+
+	<definition name="adminMenu" extends="baseLayout">
+		<put-attribute name="menuDropDown"
+			value="/admin/adminMenuDropDown.jsp" />
+	</definition>
+
+	<definition name="/adminHome.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Welcome" />
+		<put-attribute name="body" value="/admin/adminHome.jsp" />
+	</definition>
+
+	<definition name="/adminHome.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Welcome" />
+		<put-attribute name="body" value="/admin/adminHome.jsp" />
+	</definition>
+
+	<!-- By Prashant For Client Manage -->
+
+	<definition name="/showClients.tiles" extends="adminMenu">
+		<put-attribute name="title" value="All clients" />
+		<put-attribute name="body" value="/admin/showClient.jsp" />
+	</definition>
+
+	<definition name="/addNewClient.tiles" extends="popUp">
+		<put-attribute name="title" value="Add client" />
+		<put-attribute name="body" value="/admin/addClient.jsp" />
+	</definition>
+	<definition name="/viewStores.tiles" extends="popUp">
+		<put-attribute name="title" value="View Stores" />
+		<put-attribute name="body"
+			value="/admin/viewClientStore.jsp" />
+	</definition>
+
+	<definition name="/generateCredential.tiles" extends="popUp">
+		<put-attribute name="title" value="Generate Credentials"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/generateCredential.jsp">
+		</put-attribute>
+	</definition>
+
+
+	<!-- Client Report by Preeti -->
+	<definition name="/ClientReport.tiles" extends="clientMenu">
+		<put-attribute name="title" value="Client Report"></put-attribute>
+		<put-attribute name="body"
+			value="/client/ClientReport.jsp" />
+	</definition>
+	<!-- @@@@@@ End Client Module -->
+
+	<!-- End By Prashant For Client Manage -->
+
+	<!-- Start by SHIVTEJ -->
+	<definition name="/updateClient.tiles" extends="popUp">
+		<put-attribute name="title" value="Update clients" />
+		<put-attribute name="body"
+			value="/admin/updateClientName.jsp" />
+	</definition>
+
+	<definition name="/addStore.tiles" extends="popUp">
+		<put-attribute name="title" value="Add Store" />
+		<put-attribute name="body" value="/admin/addStore.jsp" />
+	</definition>
+
+
+
+	<definition name="/deleteClient.tiles" extends="popUp">
+		<put-attribute name="title" value="Delete Client" />
+		<put-attribute name="body"
+			value="/admin/deleteClient.jsp" />
+	</definition>
+
+	<!-- by amarjit -->
+
+	<definition name="/uploadClientDoc.tiles" extends="popUp">
+		<put-attribute name="title"
+			value="Upload Client Document" />
+		<put-attribute name="body"
+			value="/admin/uploadClientDocInput.jsp" />
+	</definition>
+
+	<!-- End by SHIVTEJ -->
+
+	<!-- By Prashant For Task Manage -->
+
+	<definition name="/showAllTask.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Showing AllTask" />
+		<put-attribute name="body"
+			value="/admin/showAllTask.jsp" />
+	</definition>
+	<definition name="/addTask.tiles" extends="popUp">
+		<put-attribute name="title" value="AddTask ToUsers" />
+		<put-attribute name="body" value="/admin/addTask.jsp" />
+	</definition>
+	<definition name="/updateTask.tiles" extends="popUp">
+		<put-attribute name="title" value="Update UserTask" />
+		<put-attribute name="body" value="/admin/updateTask.jsp" />
+	</definition>
+	<definition name="/deleteTask.tiles" extends="popUp">
+		<put-attribute name="title" value="Delete UserTask" />
+		<put-attribute name="body" value="/admin/deleteTask.jsp" />
+	</definition>
+	<!--End By Prashant For Task Manage -->
+	<!--Start By Prashant For Feedback Manage -->
+
+	<definition name="/finishedFeedbackByUser.tiles"
+		extends="adminMenu">
+		<put-attribute name="title" value="Finish Task" />
+		<put-attribute name="body"
+			value="/admin/FeedbackList.jsp" />
+	</definition>
+	<definition name="/allTaskResponses.tiles"
+		extends="adminMenu">
+		<put-attribute name="title" value="Finish Task" />
+		<put-attribute name="body"
+			value="/user/TaskResponsesByUser.jsp" />
+	</definition>
+	<definition name="/allPublishedTaskToUsers.tiles"
+		extends="userMenu">
+		<put-attribute name="title" value="Published Task" />
+		<put-attribute name="body"
+			value="/user/showPublishedTaskToUser.jsp" />
+	</definition>
+	<definition name="/approveFeedback.tiles" extends="popUp">
+		<put-attribute name="title" value="Finish Task" />
+		<put-attribute name="body"
+			value="/admin/approveFeedback.jsp" />
+	</definition>
+	<definition name="/rejectFeedback.tiles" extends="popUp">
+		<put-attribute name="title" value="Finish Task" />
+		<put-attribute name="body"
+			value="/admin/rejectFeedback.jsp" />
+	</definition>
+	<definition name="/approvedFeedbackDetailsByAdmin.tiles"
+		extends="adminMenu">
+		<put-attribute name="title" value="Finish Task" />
+		<put-attribute name="body"
+			value="/admin/FeedbackList.jsp" />
+	</definition>
+	<definition name="/rejectedFeedbackDetailsByAdmin.tiles"
+		extends="adminMenu">
+		<put-attribute name="title" value="Finish Task" />
+		<put-attribute name="body"
+			value="/admin/FeedbackList.jsp" />
+	</definition>
+
+	<!--End By Prashant For Feedback Manage -->
+
+	<!-- By Amarjit For RewardPoints Manage -->
+
+	<definition name="/showRewards.tiles" extends="adminMenu">
+		<put-attribute name="title" value="All Rewards" />
+		<put-attribute name="body"
+			value="/admin/showRewards.jsp" />
+	</definition>
+
+	<definition name="/showClientRewards.tiles"
+		extends="adminMenu">
+		<put-attribute name="title" value="All Rewards" />
+		<put-attribute name="body"
+			value="/admin/showClientRewardPoints.jsp" />
+	</definition>
+	<definition name="/taskNamesForResponses.tiles"
+		extends="adminMenu">
+		<put-attribute name="title" value="Responses For Task" />
+		<put-attribute name="body"
+			value="/user/taskNamesForResponses.jsp" />
+	</definition>
+
+	<definition name="/addClientPointsInput.tiles"
+		extends="popUp">
+		<put-attribute name="title"
+			value="Add Task Points To Clients" />
+		<put-attribute name="body"
+			value="/admin/addClientPointsInput.jsp" />
+	</definition>
+
+
+	<definition name="/redeemRewardsInput.tiles" extends="popUp">
+		<put-attribute name="title" value="Redeem Rewards " />
+		<put-attribute name="body"
+			value="/admin/redeemRewardsInput.jsp" />
+	</definition>
+	<definition name="/redeemRewards.tiles" extends="popUp">
+		<put-attribute name="title" value="Redeem Rewards " />
+		<put-attribute name="body"
+			value="/admin/redeemRewardsInput.jsp" />
+	</definition>
+
+	<!-- Start by Amit Edit Client Task point -->
+
+
+	<definition name="/editClientPointsInput.tiles"
+		extends="popUp">
+		<put-attribute name="title" value="Edit Task Points " />
+		<put-attribute name="body"
+			value="/admin/editClientPointsInput.jsp" />
+	</definition>
+
+
+	<!-- End Amarjit For RewardPoints Manage -->
+	<!-- @@@@@@ For User Module @@@@@@ -->
+
+
+
+	<definition name="userMenu" extends="baseLayout">
+		<put-attribute name="menuDropDown"
+			value="/user/userMenuDropDown.jsp" />
+	</definition>
+
+	<definition name="/userHome.tiles" extends="userMenu">
+		<put-attribute name="title" value="Welcome" />
+		<put-attribute name="body" value="/user/userHome.jsp" />
+	</definition>
+
+	<!-- By Prashant For User Register -->
+
+	<definition name="/registerUsers.tiles"
+		extends="userRegistration">
+		<put-attribute name="title" value="Welcome" />
+		<put-attribute name="body"
+			value="/user/registerUser.jsp" />
+	</definition>
+
+	<!--End By Prashant For User Register -->
+	<!-- By Prashant For User Task Manage -->
+
+	<definition name="/allInitiatedTaskToUsers.tiles"
+		extends="userMenu">
+		<put-attribute name="title" value="Initiated Task" />
+		<put-attribute name="body"
+			value="/user/showInitiatedTaskToUser.jsp" />
+	</definition>
+	<definition name="/allAcceptedTaskByUsers.tiles"
+		extends="userMenu">
+		<put-attribute name="title" value="Accepted Task" />
+		<put-attribute name="body"
+			value="/user/showAcceptedTaskToUser.jsp" />
+	</definition>
+	<definition name="/allFinishedTaskByUsers.tiles"
+		extends="userMenu">
+		<put-attribute name="title" value="Finished Task" />
+		<put-attribute name="body"
+			value="/user/showFinishedTaskToUser.jsp" />
+	</definition>
+
+	<definition name="/acceptTask.tiles" extends="popUp">
+		<put-attribute name="title" value="Accept Task" />
+		<put-attribute name="body"
+			value="/user/acceptTaskByUser.jsp" />
+	</definition>
+
+	<!-- End By Prashant For User Task Manage -->
+	<!-- By Prashant For User Feedback Manage -->
+
+	<definition name="/feedbackByUser.tiles" extends="popUp">
+		<put-attribute name="title" value="Accept Task" />
+		<put-attribute name="body"
+			value="/user/addFeedbackByUser.jsp" />
+	</definition>
+
+	<!-- By Amarjit for Points Manage -->
+
+	<definition name="/getUserRewards.tiles" extends="userMenu">
+		<put-attribute name="title" value="My Points" />
+		<put-attribute name="body"
+			value="/user/getUserRewards.jsp" />
+	</definition>
+	<definition name="/redeemUserPointsInput.tiles"
+		extends="popUp">
+		<put-attribute name="title" value="Redeem Points" />
+		<put-attribute name="body"
+			value="/user/redeemUserPointsInput.jsp" />
+	</definition>
+
+	<!-- By Amarjit for Points Manage -->
+
+	<!-- End By Prashant For User Feedback Manage -->
+	<!-- @@@@@@ End For User Module @@@@@@ -->
+
+	<!-- @@@@@@ For Client Module -->
+
+	<definition name="clientMenu" extends="baseLayout">
+		<put-attribute name="menuDropDown"
+			value="/client/clientMenuDropDown.jsp" />
+	</definition>
+
+	<definition name="/clientHome.tiles" extends="clientMenu">
+		<put-attribute name="title" value="Welcome" />
+		<put-attribute name="body"
+			value="/client/clientHome.jsp" />
+	</definition>
+	<definition name="/addFeedbackByClient.tiles"
+		extends="popUp">
+		<put-attribute name="title"
+			value="Add Feedback From Client" />
+		<put-attribute name="body"
+			value="/client/addFeedbackByClient.jsp" />
+	</definition>
+
+
+	<!-- Start By Manish For User Mang. -->
+
+	<definition name="/userPassByAdmin.tiles" extends="popUp">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="body"
+			value="/admin/userPassByAdmin.jsp" />
+	</definition>
+
+	<definition name="/suspendUser.tiles" extends="popUp">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="body"
+			value="/admin/suspendUser.jsp" />
+	</definition>
+
+	<definition name="/userCredentials.tiles" extends="popUp">
+		<put-attribute name="title" value="User Credentials" />
+		<put-attribute name="body"
+			value="/admin/userCredentials.jsp" />
+	</definition>
+	<!-- End By Manish For User Mang. -->
+	<definition name="/adminProfileClient.tiles" extends="clientMenu">
+		<put-attribute name="title" value="UserProfile" />
+		<put-attribute name="body" value="/user/userProfile.jsp" />
+	</definition>
+	<!-- Start by Manish For User Profile Mang. -->
+
+	<definition name="/userProfile.tiles" extends="userMenu">
+		<put-attribute name="title" value="UserProfile" />
+		<put-attribute name="body" value="/user/userProfile.jsp" />
+	</definition>
+
+	<definition name="/userProfileEditable.tiles"
+		extends="popUp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/user/userProfileEditable.jsp" />
+	</definition>
+
+
+	<definition name="/userPassword.tiles" extends="popUp">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="body"
+			value="/user/userPassword.jsp" />
+	</definition>
+
+	<!-- End by Manish For User Profile Mang. -->
+
+	<!-- Start by Manish For Admin Profile Mang. -->
+
+	<definition name="/adminProfile.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Admin Profile" />
+		<put-attribute name="body"
+			value="/admin/adminProfile.jsp" />
+	</definition>
+
+	<definition name="/adminProfileEditable.tiles"
+		extends="popUp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/admin/adminProfileEditable.jsp" />
+	</definition>
+
+	<definition name="/adminPassword.tiles" extends="popUp">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="body"
+			value="/admin/adminPassword.jsp" />
+	</definition>
+
+	<!-- End by Manish For Admin Profile Mang. -->
+
+	<!-- start by kiran -->
+	<definition name="/successfulVerification.tiles"
+		extends="baseLayout">
+		<put-attribute name="title" value="SuccefullyVerified"></put-attribute>
+		<put-attribute name="body"
+			value="/common/successfulVerification.jsp">
+		</put-attribute>
+	</definition>
+
+	<definition name="/login.tiles" extends="baseLayout">
+		<put-attribute name="title" value="SuccefullyRegistered"></put-attribute>
+		<put-attribute name="body" value="/common/login.jsp"></put-attribute>
+	</definition>
+
+	<definition name="/UnsuccessfulVerification.tiles"
+		extends="baseLayout">
+		<put-attribute name="title" value="Unsuccessful"></put-attribute>
+		<put-attribute name="body"
+			value="/common/UnsuccessfulVerification.jsp">
+		</put-attribute>
+	</definition>
+
+	<definition name="/allUsers.tiles" extends="adminMenu">
+		<put-attribute name="title" value="userDetails"></put-attribute>
+		<put-attribute name="body"
+			value="/user/showUserList.jsp"></put-attribute>
+	</definition>
+
+	<definition name="/verification.tiles" extends="baseLayout">
+		<put-attribute name="title" value="VerificationPage"></put-attribute>
+		<put-attribute name="body"
+			value="/common/UserVerificationPage.jsp">
+		</put-attribute>
+	</definition>
+
+	<definition name="/errorInApprove.tiles" extends="popUp">
+		<put-attribute name="title" value="Error Page"></put-attribute>
+		<put-attribute name="body"
+			value="/common/ErrorInApprove.jsp"></put-attribute>
+	</definition>
+	<definition name="/userDocumentReport.tiles" extends="popUp">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/userDocumentReport.jsp">
+		</put-attribute>
+	</definition>
+	<definition name="/feedbackDocumentReport.tiles"
+		extends="popUp">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/feedbackDocumentReport.jsp">
+		</put-attribute>
+	</definition>
+	<!-- end by kiran -->
+	<!-- kiran d city area start -->
+	<definition name="/allCity.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body" value="/admin/allCity.jsp"></put-attribute>
+	</definition>
+	<definition name="/allCityAreas.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/allCityAreas.jsp"></put-attribute>
+	</definition>
+	<!-- kiran d city area end -->
+
+
+	<!-- Start by Sneha -->
+
+	<definition name="/addLocation.tiles" extends="popUp">
+		<put-attribute name="title" value="Add New Location" />
+		<put-attribute name="body"
+			value="/admin/addLocation.jsp" />
+	</definition>
+
+	<definition name="/addNewLocation.tiles" extends="popUp">
+		<put-attribute name="title" value="Add Locations" />
+		<put-attribute name="body"
+			value="/admin/addLocation.jsp" />
+	</definition>
+
+	<definition name="/addLocationArea.tiles" extends="popUp">
+		<put-attribute name="title"
+			value="Add New Location Area" />
+		<put-attribute name="body"
+			value="/admin/addLocationArea.jsp" />
+	</definition>
+
+	<!-- End by Sneha -->
+
+
+
+
+	<!-- kiran d report start -->
+
+	<definition name="/feedbackReport.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/reports/feedbackReport.jsp">
+		</put-attribute>
+	</definition>
+
+	<!-- by amarjit for feedback report -->
+	<definition name="/emailFeedback.tiles" extends="popUp">
+		<put-attribute name="title" value="Email Report" />
+		<put-attribute name="body"
+			value="/admin/reports/emailReport.jsp" />
+	</definition>
+	<definition name="/noClientExist.tiles" extends="popUp">
+		<put-attribute name="title" value="Error Report" />
+		<put-attribute name="body"
+			value="/admin/reports/errorEmailReport.jsp" />
+	</definition>
+
+	<!-- by amarjit for feedback report -->
+
+	<definition name="/taskReport.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/reports/taskReport.jsp">
+		</put-attribute>
+	</definition>
+	<definition name="/usersReport.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/reports/usersReport.jsp">
+		</put-attribute>
+	</definition>
+	<definition name="/activityReport.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/reports/activityReport.jsp">
+		</put-attribute>
+	</definition>
+	<definition name="/activityReportUser.tiles"
+		extends="userMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/reports/activityReport.jsp">
+		</put-attribute>
+	</definition>
+	<definition name="/uidactivityReport.tiles"
+		extends="adminMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/reports/uidactivityReport.jsp">
+		</put-attribute>
+	</definition>
+	<definition name="/rewardsReport.tiles" extends="adminMenu">
+		<put-attribute name="title" value="Report Page"></put-attribute>
+		<put-attribute name="body"
+			value="/admin/reports/rewardsReport.jsp">
+		</put-attribute>
+	</definition>
+
+
+	<!-- kiran d report end -->
+</tiles-definitions>

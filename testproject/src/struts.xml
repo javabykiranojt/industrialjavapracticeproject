@@ -1,0 +1,1198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.custom.i18n.resources"
+		value="ApplicationResources" />
+	<constant name="struts.multipart.maxSize" value="1073741824" />
+	<!-- Maximum file size is 1GB -->
+	<include file="struts-default.xml" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+
+	<package name="default" extends="struts-default" namespace="/">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+		<interceptors>
+
+			<interceptor name="loggingInterceptor"
+				class="com.kjnext.interceptor.LoggingInterceptor">
+			</interceptor>
+			<interceptor name="authenticationInterceptor"
+				class="com.kjnext.interceptor.AuthenticationInterceptor">
+			</interceptor>
+			<interceptor name="transactionInterceptor"
+				class="com.kjnext.interceptor.TransactionInterceptor" />
+			<interceptor name="nonTransactionInterceptor"
+				class="com.kjnext.interceptor.NonTransactionInterceptor" />
+
+			<interceptor-stack name="transactionStack">
+				<interceptor-ref name="loggingInterceptor" />
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="transactionInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+			<interceptor-stack name="onlyTransactionNoAuthentication">
+				<interceptor-ref name="loggingInterceptor" />
+				<interceptor-ref name="transactionInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+			<interceptor-stack
+				name="NoTransactionNoAuthenticationOnlySession">
+				<interceptor-ref name="loggingInterceptor" />
+				<interceptor-ref name="nonTransactionInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+			<interceptor-stack name="onlySessionAndAuthentication">
+				<interceptor-ref name="loggingInterceptor" />
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="nonTransactionInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+			<interceptor-stack name="loggingStack">
+				<interceptor-ref name="loggingInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+		</interceptors>
+		<global-results>
+			<result name="login">/common/login.jsp</result>
+			<result name="unauthorized">
+				/common/unauthorized.jsp
+			</result>
+			<result name="error">/common/error.jsp</result>
+			<result name="applicationError">
+				/common/applicationError.jsp
+			</result>
+		</global-results>
+
+		<action name="login" class="com.kjnext.action.LoginAction"
+			method="loginCheck">
+		
+			<interceptor-ref
+				name="onlyTransactionNoAuthentication">
+			</interceptor-ref>
+			<result name="user" type="redirectAction">
+				<param name="actionName">getAllInitiatedTask</param>
+			</result>
+			<result name="admin" type="redirectAction">
+				<param name="actionName">allusers</param>
+			</result>
+			<result name="client" type="redirectAction">
+				<param name="actionName">clientFeedBackReport</param>
+			</result>
+			<result name="error">/common/login.jsp</result>
+		</action>
+
+		<action name="logout" class="com.kjnext.action.LoginAction"
+			method="userLogOff">
+			<interceptor-ref name="onlyTransactionNoAuthentication"></interceptor-ref>
+			<result name="success">/common/login.jsp</result>
+		</action>
+
+
+		<!-- *************************************lucky***************************************** -->
+
+		<action name="sendforgetpassword"
+			class="com.kjnext.action.AdminAction"
+			method="sendForgetPasswordAction">
+			<interceptor-ref
+				name="onlyTransactionNoAuthentication">
+			</interceptor-ref>
+			<result name="success" type="tiles">
+				/sendforgetpassword.tiles
+			</result>
+			<result name="nosend" type="tiles">
+				/sendforgetpassword.tiles
+			</result>
+			<result name="invalid" type="tiles">
+				/sendforgetpassword.tiles
+			</result>
+
+
+		</action>
+
+		<!-- @@@@@@ For Here Action Comming Fron Admin Module  @@@@@@ -->
+		<!-- By Prashant For Client Manage  -->
+		<action name="showAllClient"
+			class="com.kjnext.action.ClientAction" method="showUserDetails">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+
+			<result name="success" type="tiles">
+				/showClients.tiles
+			</result>
+		</action>
+
+			
+
+		<!-- End By Prashant For Client Manage -->
+		<!-- ****************************************************************************** -->
+		<!--  Start by SHIVTEJ For "Add" "Update" "Delete"   -->
+		
+		<action name="addNewClient"
+			class="com.kjnext.action.ClientAction" method="addNewClient">
+		<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+		 <result name="success" type="tiles">
+				/addNewClient.tiles
+			</result>
+		</action>
+		
+
+		<action name="addClientInput"
+			class="com.kjnext.action.ClientAction" method="addClientInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/addNewClient.tiles
+			</result>
+			<result name="clientDuplicateExist" type="tiles">
+				/addNewClient.tiles
+			</result>
+		</action>
+		
+		<action name="deleteClient"
+			class="com.kjnext.action.ClientAction" method="preDelete">
+		<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+		 <result name="success" type="tiles">
+				/deleteClient.tiles
+			</result>
+		</action>
+		<action name="deleteClientInput"
+			class="com.kjnext.action.ClientAction" method="deleteClient">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/deleteClient.tiles
+			</result>
+		</action>
+		
+		<action name="updateClient"
+			class="com.kjnext.action.ClientAction" method="updateClient">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/updateClient.tiles
+			</result>
+		</action>
+		<action name="updateClientInput"
+			class="com.kjnext.action.ClientAction" method="updateClientInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/updateClient.tiles
+			</result>
+		</action>
+
+		<action name="generateCredential"
+			class="com.kjnext.action.ClientAction" method="generateCredential">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/generateCredential.tiles
+			</result>
+		</action>
+
+		<action name="generateCredentialInput"
+			class="com.kjnext.action.ClientAction"
+			method="generateCredentialInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/generateCredential.tiles
+			</result>
+		</action>
+		
+		
+		<action name="addStore"
+			class="com.kjnext.action.ClientAction"
+			method="addStore">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/addStore.tiles
+			</result>
+		</action>
+		
+		<action name="addStoreInput"
+			class="com.kjnext.action.ClientAction"
+			method="addStoreInput">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/addStore.tiles
+			</result>
+		</action>
+
+
+		<action name="differentLocationAreas1"
+			class="com.kjnext.action.ClientAction"
+			method="differentLocationAreas">
+			<interceptor-ref
+				name="NoTransactionNoAuthenticationOnlySession">
+			</interceptor-ref>
+		</action>
+
+	<!-- by amarjit for clientDocUpload -->
+		<action name="uploadClientDocInput"
+			class="com.kjnext.action.ClientAction" method="uploadClientDocInput">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/uploadClientDoc.tiles
+			</result>
+		</action>
+		<action name="uploadClientDoc"
+			class="com.kjnext.action.ClientAction" method="uploadClientDoc">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/uploadClientDoc.tiles
+			</result>
+		</action>
+		
+		<!-- end amarjit for clientDocUpload -->
+		<!-- start Amit for client view Store -->
+		
+		<action name="viewStoreClient" class="com.kjnext.action.ClientAction" method="viewStores">
+		<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+		<result name="success" type="tiles">
+			/viewStores.tiles
+		</result>
+		</action>
+
+		<!--  End by SHIVTEJ   -->
+<!-- ********************************************************************************************* -->
+		<!-- By Prashant For Task Manage  -->
+		<action name="showAllTask" class="com.kjnext.action.TaskAction"
+			method="loadAllTask">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/showAllTask.tiles
+			</result>
+		</action>
+		<action name="addTaskInputPage"
+			class="com.kjnext.action.TaskAction" method="addTaskInputPage">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">/addTask.tiles</result>
+		    <result name="noUserClientExit" type="tiles">/addTask.tiles</result>  
+		</action>
+		<action name="reasignInput"
+			class="com.kjnext.action.TaskAction" method="reasignInput">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">/reasignInput.tiles</result>
+		</action>
+		<action name="addTaskToOther" class="com.kjnext.action.TaskAction"
+			method="addTaskToOther">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">/reasignInput.tiles</result>
+		</action>
+		<action name="addTask" class="com.kjnext.action.TaskAction"
+			method="addTask">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">/addTask.tiles</result>
+			<result name="input" type="tiles">/addTask.tiles</result>
+		</action>
+		<action name="closeAndUnlockTask" class="com.kjnext.action.TaskAction"
+			method="closeAndUnlockTask">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+				<result name="success" type="tiles">/addTask.tiles</result>
+		</action>
+		<action name="finalAsignTaskToUser" class="com.kjnext.action.TaskAction"
+			method="finalAsignTaskToUser">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">/allTaskResponses.tiles</result>
+		</action>
+		<!--<action name="addFeedback" class="com.kjnext.action.TaskAction"
+			method="addTaskToUserInput">
+			<result name="success" type="tiles">/addTask.tiles</result>
+			</action>
+		-->
+		<action name="updateTaskInputPage"
+			class="com.kjnext.action.TaskAction" method="updateTaskInputPage">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">/updateTask.tiles</result>
+		</action>
+		<action name="updateTask" class="com.kjnext.action.TaskAction"
+			method="updateTask">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/updateTask.tiles
+			</result>
+			<result name="noUpdation" type="tiles">
+			        /updateTask.tiles
+		</result>
+		</action>
+		<action name="deleteTask" class="com.kjnext.action.TaskAction"
+			method="deleteTask">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/deleteTask.tiles
+			</result>
+		</action>
+		<action name="deleteTaskInput"
+			class="com.kjnext.action.TaskAction" method="deleteTaskInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/deleteTask.tiles
+			</result>
+		</action>
+
+		<!-- ***************Ajax Calls************** -->
+
+		<!-- Ajax Call to get differentUsersAndClients on location-->
+		<action name="differentUsers"
+			class="com.kjnext.action.TaskAction" method="differentUsers">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+		</action>
+
+		<action name="differentClients"
+			class="com.kjnext.action.TaskAction" method="differentClients">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+		</action>
+
+		<action name="differentLocationAreas"
+			class="com.kjnext.action.UserAction"
+			method="differentLocationAreas">
+			<interceptor-ref
+				name="NoTransactionNoAuthenticationOnlySession">
+			</interceptor-ref>
+		</action>
+			
+			
+		<!-- ***************Ajax Calls END************** -->
+
+		<!-- End By Prashant For Task Manage -->
+		<!-- Start By Prashant For Feedback Manage -->
+		<action name="getAllFinishedFeedbackByUser"
+			class="com.kjnext.action.FeedbackAction"
+			method="getAllFinishedFeedbackByUser">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/finishedFeedbackByUser.tiles
+			</result>
+		</action>
+		<action name="approveFeedback"
+			class="com.kjnext.action.FeedbackAction" method="approveFeedback">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/approveFeedback.tiles
+			</result>
+		</action>
+		<action name="approveFeedbackInput"
+			class="com.kjnext.action.FeedbackAction"
+			method="approveFeedbackInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/approveFeedback.tiles
+			</result>
+		</action>
+		<action name="rejectFeedback"
+			class="com.kjnext.action.FeedbackAction" method="rejectFeedback">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/rejectFeedback.tiles
+			</result>
+		</action>
+		<action name="rejectFeedbackInput"
+			class="com.kjnext.action.FeedbackAction"
+			method="rejectFeedbackInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/rejectFeedback.tiles
+			</result>
+		</action>
+		<action name="getAllApprovedFeedbackByAdmin"
+			class="com.kjnext.action.FeedbackAction"
+			method="getAllApprovedFeedbackByAdmin">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/approvedFeedbackDetailsByAdmin.tiles
+			</result>
+		</action>
+		<action name="getAllRejectedFeedbackByAdmin"
+			class="com.kjnext.action.FeedbackAction"
+			method="getAllRejectedFeedbackByAdmin">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/rejectedFeedbackDetailsByAdmin.tiles
+			</result>
+		</action>
+		<!-- End By Prashant For Feedback Manage -->
+		<!-- @@@@@@ For Here Action Comming Fron CLIENT Module  @@@@@@ -->
+
+
+		<!-- @@@@@@ For Here Action Comming Fron USER Module  @@@@@@-->
+			<!--<action name="newLogin" class="com.kjnext.action.UserAction"
+			method="registerUser">
+			<interceptor-ref
+				name="NoTransactionNoAuthenticationOnlySession">
+			</interceptor-ref>
+			<result name="success" type="tiles">
+				/registerUsers.tiles
+			</result>
+		</action>
+		--><action name="signUpPage" class="com.kjnext.action.UserAction"
+			method="registerUser">
+			<interceptor-ref
+				name="NoTransactionNoAuthenticationOnlySession">
+			</interceptor-ref>
+			<result name="success" type="tiles">
+				/registerUsers.tiles
+			</result>
+		</action>
+		<!-- End By Prashant For User Register -->
+		<!-- By Prashant For User Task Manage-->
+
+		<action name="getAllInitiatedTask"
+			class="com.kjnext.action.UserAction" method="getAllInitiatedTask">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/allInitiatedTaskToUsers.tiles
+			</result>
+		</action>
+		
+		<action name="getAllPublishedTask"
+			class="com.kjnext.action.UserAction" method="getAllPublishedTask">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/allPublishedTaskToUsers.tiles
+			</result>
+		</action>
+		
+		<action name="getAllAcceptedTask"
+			class="com.kjnext.action.UserAction" method="getAllAcceptedTask">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/allAcceptedTaskByUsers.tiles
+			</result>
+		</action>
+
+		<action name="taskResponses"
+			class="com.kjnext.action.UserAction" method="taskResponses">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/allTaskResponses.tiles
+			</result>
+		</action>
+
+		<action name="taskNamesForResponses"
+			class="com.kjnext.action.UserAction" method="taskNamesForResponses">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/taskNamesForResponses.tiles
+			</result>
+		</action>
+		
+		<action name="getAllFinishedTask"
+			class="com.kjnext.action.UserAction" method="getAllFinishedTask">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/allFinishedTaskByUsers.tiles
+			</result>
+		</action>
+		<action name="acceptTaskByUser"
+			class="com.kjnext.action.UserAction" method="acceptTaskByUser">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/acceptTask.tiles
+			</result>
+		</action>
+		<action name="acceptPubTaskByUser"
+			class="com.kjnext.action.UserAction" method="acceptPubTaskByUser">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/allPublishedTaskToUsers.tiles
+			</result>
+		</action>
+		<action name="rejectPubTask"
+			class="com.kjnext.action.UserAction" method="rejectPubTaskByUser">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/allPublishedTaskToUsers.tiles
+			</result>
+		</action>
+		<action name="acceptTaskInputByUser"
+			class="com.kjnext.action.UserAction"
+			method="acceptTaskInputByUser">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/acceptTask.tiles
+			</result>
+		</action>
+		<!-- End By Prashant For User Task Manage -->
+		<!-- By Prashant For User Feedback Manage-->
+		<action name="userFeedbackInput"
+			class="com.kjnext.action.FeedbackAction"
+			method="userFeedbackInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/feedbackByUser.tiles
+			</result>
+		</action>
+		<action name="addFeedback"
+			class="com.kjnext.action.FeedbackAction" method="addFeedback">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/feedbackByUser.tiles
+			</result>
+		</action>
+		<!-- End By Prashant For User Feedback Manage -->
+
+
+		<!-- Start By Amarjit For Reward Point Management -->
+
+		<action name="showAllRewards"
+			class="com.kjnext.action.RewardAction" method="showAllRewards">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/showRewards.tiles
+			</result>
+		</action>
+		<action name="showClientRewardPoints"
+			class="com.kjnext.action.ClientRewardAction"
+			method="showClientRewardPoints">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/showClientRewards.tiles
+			</result>
+		</action>
+
+		<action name="addNewTaskClientPointsInput"
+			class="com.kjnext.action.ClientRewardAction"
+			method="addClientPointsInput">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/addClientPointsInput.tiles
+			</result>
+		</action>
+		<action name="addNewTaskClientPoints"
+			class="com.kjnext.action.ClientRewardAction"
+			method="addClientPoints">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/addClientPointsInput.tiles
+			</result>
+		</action>
+
+		<action name="redeemRewardsInput"
+			class="com.kjnext.action.RewardAction"
+			method="redeemRewardsInput">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/redeemRewardsInput.tiles
+			</result>
+		</action>
+		<action name="redeemRewards"
+			class="com.kjnext.action.RewardAction"
+			method="redeemRewards">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/redeemRewards.tiles
+			</result>
+		</action>
+			
+			<!--	Start by Amit Edit Task Point	-->
+	
+		<action name="editTaskClientPointsInput"
+			class="com.kjnext.action.ClientRewardAction"
+			method="getClientPointsEditInput">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/editClientPointsInput.tiles
+			</result>
+		</action>
+			<action name="updateTaskClientPoints"
+			class="com.kjnext.action.ClientRewardAction"
+			method="updateTaskClientPoints">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/editClientPointsInput.tiles
+			</result>
+		</action>
+		<!-- End By Amarjit For Reward Point Management -->
+		<!-- by kiran k -->
+		<action name="verificationPage"
+			class="com.kjnext.action.UserAction" method="verificationPage">
+			<interceptor-ref name="onlyTransactionNoAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/verification.tiles
+			</result>
+		</action>
+
+		<action name="verificationPageInput"
+			class="com.kjnext.action.UserAction"
+			method="verificationPageInput">
+			<interceptor-ref name="onlyTransactionNoAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/verification.tiles
+			</result>
+			<result name="unSuccess" type="tiles">
+				/verification.tiles
+			</result>
+		</action>
+
+		<action name="registerNewUserInput"
+			class="com.kjnext.action.UserAction" method="newUserRegistration">
+			<interceptor-ref name="onlyTransactionNoAuthentication"></interceptor-ref>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">1073741824</param>
+			</interceptor-ref>
+			<result name="success">/common/login.jsp</result>
+			<result name="addFieldErrorOccured" type="tiles">
+				/registerUsers.tiles
+			</result>
+			<result name="error" type="tiles">
+				/UnsuccessfulVerification.tiles
+			</result>
+		</action>
+		
+			<action name="userpassforget"
+			class="com.kjnext.action.UserAction" method="userpassforget">
+			<result name="success" type="tiles">
+				/userpassforget.tiles
+			</result>
+		</action>
+			
+		<action name="allusers" class="com.kjnext.action.UserAction"
+			method="allUser">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">/allUsers.tiles</result>
+		</action>
+
+		<action name="sendVerificationId"
+			class="com.kjnext.action.UserAction" method="sendVerificationId">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">/allUsers.tiles</result>
+		</action>
+
+		<action name="generateReport"
+			class="com.kjnext.action.UserAction" method="userDocumentReport">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userDocumentReport.tiles
+			</result>
+		</action>
+		
+		<action name="generateFeedbackReport" class="com.kjnext.action.UserAction" method="feedbackDocumentReport">
+     		 <interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+        	 <result name="success" type="tiles">/feedbackDocumentReport.tiles</result>
+        </action> 
+        
+        <action name="reviewFeedbackReport" class="com.kjnext.action.FeedbackAction" method="reviewDocumentReportInput">
+     		 <interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+        	 <result name="success" type="tiles">/reviewDocumentReportInput.tiles</result>
+        </action> 
+         <action name="updateUserFeedbackbyAdmin" class="com.kjnext.action.FeedbackAction" method="updateUserFeedbackbyAdmin">
+     		 <interceptor-ref name="transactionStack"></interceptor-ref>
+        	 <result name="success" type="tiles">/reviewDocumentReportInput.tiles</result>
+        </action> 
+		<action name="getFile" class="com.kjnext.action.UserAction"
+			method="getfile">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="stream">
+				<param name="contentType">
+					application/octet-stream
+				</param>
+				<param name="inputName">userFiles</param>
+				<param name="contentDisposition">
+					attachment;filename="${panCardFileName}"
+				</param>
+				<param name="contentLength">
+					${panCardContentLength}
+				</param>
+				<param name="bufferSize">204822</param>
+			</result>
+		</action>
+
+		<action name="activateUser" class="com.kjnext.action.UserAction"
+			method="activateUser">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="redirect">allusers</result>
+		</action>
+
+		<!-- end by kiran -->
+
+
+		<!-- **********************MANISH'S WORKSPACE starts here**************************** -->
+		<!-- Start By Manish For User Mang. -->
+
+		<action name="suspendUserInput"
+			class="com.kjnext.action.AdminAction" method="suspendUserCheck">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/suspendUser.tiles
+			</result>
+		</action>
+
+		<action name="suspendUser" class="com.kjnext.action.AdminAction"
+			method="suspendUser">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/suspendUser.tiles
+			</result>
+		</action>
+
+	
+		<action name="changeUserPassByAdmin"
+			class="com.kjnext.action.AdminAction"
+			method="changeUserPassByAdminInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userPassByAdmin.tiles
+			</result>
+		<result name="error" type="redirectAction">
+		<param name="actionName">allusers</param>
+		<param name="actionMsg">${actionMsg}</param>
+		
+		 </result>
+		</action>
+	<!-- Start Amit user Validation. -->
+	
+		<!--<action name="errorMsgToAdmin"
+			class="com.kjnext.action.AdminAction"
+			method="errorMsgToAdmin">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userErrorMsgAdmin.tiles
+			</result>
+			</action>
+			
+		--><action name="changeUserPassByAdminInput"
+			class="com.kjnext.action.AdminAction"
+			method="changeUserPassByAdmin">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userPassByAdmin.tiles
+			</result>
+		</action>
+
+		<action name="manageUserCredentialsByAdmin"
+			class="com.kjnext.action.AdminAction"
+			method="manageUserCredentialsByAdmin">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userCredentials.tiles
+			</result>
+		</action>
+
+		<!-- End By Manish For User Mang. -->
+
+		<!-- Start By Manish For User Profile Mang. -->
+
+		<action name="showUserProfile"
+			class="com.kjnext.action.UserProfileAction" method="loadProfile">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userProfile.tiles
+			</result>
+		</action>
+
+		<action name="editUserProfile"
+			class="com.kjnext.action.UserProfileAction" method="loadProfile">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userProfileEditable.tiles
+			</result>
+		</action>
+
+		<action name="editUserProfileInput"
+			class="com.kjnext.action.UserProfileAction"
+			method="editUserProfileInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userProfileEditable.tiles
+			</result>
+		</action>
+
+		<action name="changeUserPassword"
+			class="com.kjnext.action.UserProfileAction"
+			method="changeUserPassword">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userPassword.tiles
+			</result>
+		</action>
+
+		<action name="changeUserPasswordInput"
+			class="com.kjnext.action.UserProfileAction"
+			method="changeUserPasswordInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/userPassword.tiles
+			</result>
+		</action>
+
+		<!-- End By Manish For User Profile Mang. -->
+		<!-- =============================================================== -->
+		<!-- -For user Points management as user -->
+		
+		<action name="getUserRewards"
+			class="com.kjnext.action.UserProfileAction"
+			method="loadUserRewards">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/getUserRewards.tiles
+			</result>
+		</action>
+		<action name="redeemUserPointsInput"
+			class="com.kjnext.action.UserProfileAction"
+			method="redeemUserPointsInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/redeemUserPointsInput.tiles
+			</result>
+		</action>
+		<action name="redeemPoints"
+			class="com.kjnext.action.UserProfileAction"
+			method="redeemUserPoints">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/redeemUserPointsInput.tiles
+			</result>
+			<result name="morepoints" type="tiles">
+				/redeemUserPointsInput.tiles
+			</result>
+		</action>
+		<!-- ==End by Amarjit for Point management   as user -->
+
+		<!-- Start By Manish For Admin Profile Mang. -->
+
+		<action name="showAdminProfile"
+			class="com.kjnext.action.AdminAction" method="loadProfile">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/adminProfile.tiles
+			</result>
+			<result name="successClient" type="tiles">
+				/adminProfileClient.tiles
+			</result>
+		</action>
+
+		<action name="editAdminProfile"
+			class="com.kjnext.action.AdminAction" method="loadProfile">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/adminProfileEditable.tiles
+			</result>
+			<result name="successClient" type="tiles">
+				/adminProfileEditable.tiles
+			</result>
+		</action>
+
+		<action name="editAdminProfileInput"
+			class="com.kjnext.action.AdminAction"
+			method="editAdminProfileInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/adminProfileEditable.tiles
+			</result>
+		</action>
+		<action name="changeAdminPassword"
+			class="com.kjnext.action.AdminAction" method="changeAdminPassword">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/adminPassword.tiles
+			</result>
+		</action>
+
+		<action name="changeAdminPasswordInput"
+			class="com.kjnext.action.AdminAction"
+			method="changeAdminPasswordInput">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/adminPassword.tiles
+			</result>
+		</action>
+
+		<!-- End By Manish For Admin Profile Mang. -->
+		
+		<!-- Start By Manish For Offline feedback form -->
+		
+		        <action name="getOfflineFeedbackForm" class="com.kjnext.action.ClientAction"
+            method="getOfflineFeedbackForm">
+            <interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+            <result name="success" type="stream">
+                <param name="contentType">
+                    application/octet-stream
+                </param>
+                <param name="inputName">feedbackForm</param>
+                <param name="contentDisposition">
+                    attachment;filename="FeedbackForm.doc"
+                </param>
+                <param name="contentLength">
+                    ${feedbackFormLength}
+                </param>
+                <param name="bufferSize">204822</param>
+            </result>
+            <result name="formNotAvailable" type="tiles">
+                /feedbackByUser.tiles
+            </result>
+        </action>
+
+		
+		<action name="addOfflineFeedback"
+			class="com.kjnext.action.FeedbackAction" method="addOfflineFeedback">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/feedbackByUser.tiles
+			</result>
+		</action>
+		
+		<!-- End By Manish For Offline feedback form -->
+		
+		<!-- **********************MANISH'S WORKSPACE ends here**************************** -->
+
+
+
+
+		<!-- Client Reports start by Preeti -->
+		
+		<!-- Client Reports start by Amarjit -->
+		<action name="clientFeedBackReport"
+			class="com.kjnext.action.ReportAction"
+			method="clientFeedBackReport">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/ClientReport.tiles
+			</result>
+		</action>
+		<action name="feedbackReportMonths"
+			class="com.kjnext.action.ReportAction"
+			method="getFeedbackReportMonths">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">
+				/ClientReport.tiles
+			</result>
+		</action>
+		<action name="clientSixMonthReport"
+			class="com.kjnext.action.ReportAction"
+			method="clientSixMonthReport">
+			<result name="success" type="tiles">
+				/ClientReport.tiles
+			</result>
+		</action>
+		<action name="clientOneYearReport"
+			class="com.kjnext.action.ReportAction"
+			method="clientOneYearReport">
+			<result name="success" type="tiles">
+				/ClientReport.tiles
+			</result>
+		</action>
+		<!-- Client Reports end by Amarjit -->
+		
+		<!-- Client Reports Reassign Feedback by Sneha -->
+		
+		<action name="addFeedbackByClient" class="com.kjnext.action.ReportAction" method="addFeedbackByClient">
+		<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/addFeedbackByClient.tiles
+			</result>
+		</action>
+		
+		<action name="ReassignFeedback" class="com.kjnext.action.ReportAction" method="reassignFeedback">
+		<interceptor-ref name="transactionStack"></interceptor-ref>
+		<result name="success" type="tiles">
+				/addFeedbackByClient.tiles
+			</result>
+		</action>
+		
+		<action name="getAllReassignedFeedbackByClient"
+			class="com.kjnext.action.FeedbackAction"
+			method="getAllReassignedFeedbackByClient">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/reassignedFeedbackByClient.tiles
+			</result>
+		</action>
+		
+		<!-- Client Reassign Feedback end by Sneha -->
+
+		<!-- Kiran Start  -->
+		<action name="loadAllCities"
+			class="com.kjnext.action.AdminAction" method="loadCities">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">/allCity.tiles</result>
+		</action>
+		<action name="loadAllCitiesAreas"
+			class="com.kjnext.action.AdminAction" method="loadCityAreas">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/allCityAreas.tiles
+			</result>
+		</action>
+		<!-- Kiran End  -->
+		<!-- kiran D report start -->
+		<action name="feedbackReport"
+			class="com.kjnext.action.ReportAction" method="feedbackReport">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/feedbackReport.tiles
+			</result>
+		</action>
+		
+		<!-- by amarjit for feedback report -->
+		<action name="emailFeedback"
+			class="com.kjnext.action.ReportAction" method="emailFeedback">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">/emailFeedback.tiles</result>
+			<result name="noClientExist" type="tiles">/noClientExist.tiles</result>  
+		</action>
+		<action name="emailFeedbackToClient"
+			class="com.kjnext.action.ReportAction" method="emailFeedbackToClient">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">/emailFeedback.tiles</result>
+		</action>
+		<action name="clientError"
+			class="com.kjnext.action.ReportAction" method="clientError">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type="tiles">/noClientExist.tiles</result>
+		</action>
+		
+		<!-- by amarjit for feedback report -->
+		
+		<action name="taskReport"
+			class="com.kjnext.action.ReportAction" method="taskReport">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/taskReport.tiles
+			</result>
+		</action>
+		<action name="usersReport"
+			class="com.kjnext.action.ReportAction" method="usersReport">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/usersReport.tiles
+			</result>
+		</action>
+		<action name="activityReport"
+			class="com.kjnext.action.ReportAction" method="activityReport">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/activityReport.tiles
+			</result>
+		</action>
+		<action name="activityReportUser"
+			class="com.kjnext.action.ReportAction" method="showHistoryForId">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/activityReportUser.tiles
+			</result>
+		</action>
+		<action name="searchHistory"
+			class="com.kjnext.action.ReportAction" method="showHistoryForId">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/activityReport.tiles
+			</result>
+		</action>
+		<action name="rewardsReport"
+			class="com.kjnext.action.ReportAction" method="rewardsReport">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/rewardsReport.tiles
+			</result>
+		</action>
+		
+		
+		<!-- Start by Sneha  -->
+		
+		<action name="addNewLocation"
+			class="com.kjnext.action.LocationAction" method="addLocationInputPage">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type = "tiles">/addLocation.tiles</result>
+		</action>
+		
+		<action name="showAllLocation"
+			class="com.kjnext.action.LocationAction" method="showLocationDetails">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">/addLocation.tiles</result>
+		</action>
+		
+		<action name="addNewLocationArea"
+			class="com.kjnext.action.LocationAction" method="addLocationAreaInputPage">
+			<interceptor-ref name="onlySessionAndAuthentication"></interceptor-ref>
+			<result name="success" type = "tiles">/addLocationArea.tiles</result>
+		</action>
+		
+		<action name="showAllLocationAreas"
+			class="com.kjnext.action.LocationAction" method="showLocationAreaDetails">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">/addLocationArea.tiles</result>
+		</action>
+		
+		<action name="deleteLocation"
+			class="com.kjnext.action.LocationAction" method="deleteLocationInputPage">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type = "tiles">/deleteLocation.tiles</result>
+		</action>
+		
+		<action name="deleteLocationArea"
+			class="com.kjnext.action.LocationAction" method="deleteLocationAreaInputPage">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type = "tiles">/deleteLocationArea.tiles</result>
+		</action>
+		
+		<action name="ConfirmDeleteLocation"
+			class="com.kjnext.action.LocationAction" method="confirmDeleteLocation">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/deleteLocation.tiles
+			</result>
+		</action>
+		
+		<action name="ConfirmDeleteLocationArea"
+			class="com.kjnext.action.LocationAction" method="ConfirmDeleteLocationArea">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/deleteLocationArea.tiles
+			</result>
+		</action>
+		
+				
+		<action name="deleteLocation"
+			class="com.kjnext.action.LocationAction" method="deleteLocationInputPage">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type = "tiles">/deleteLocation.tiles</result>
+		</action>
+		
+		<action name="deleteLocationArea"
+			class="com.kjnext.action.LocationAction" method="deleteLocationAreaInputPage">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type = "tiles">/deleteLocationArea.tiles</result>
+		</action>
+		
+		<action name="ConfirmDeleteLocation"
+			class="com.kjnext.action.LocationAction" method="confirmDeleteLocation">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/deleteLocation.tiles
+			</result>
+		</action>
+		
+		<action name="ConfirmDeleteLocationArea"
+			class="com.kjnext.action.LocationAction" method="ConfirmDeleteLocationArea">
+			<interceptor-ref name="transactionStack"></interceptor-ref>
+			<result name="success" type="tiles">
+				/deleteLocationArea.tiles
+			</result>
+		</action>
+		
+		<action name="aplicationForm" class="com.kjnext.action.AdminAction"
+			method="applicationForUser">	
+			<result name="success">/admin/AplicationForm.jsp</result>
+		</action>
+		
+		<action name="applicationEmail" class="com.kjnext.action.AdminAction" method="applicationDataForEmail">
+			<interceptor-ref name="NoTransactionNoAuthenticationOnlySession"></interceptor-ref>
+			<result name="success">/admin/AplicationForm.jsp</result>
+		</action>
+		<!-- End by Sneha  -->
+		
+		
+
+		<!-- kiran D report end -->
+	</package>
+</struts>
+
+

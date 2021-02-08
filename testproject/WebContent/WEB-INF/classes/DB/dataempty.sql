@@ -1,0 +1,14 @@
+delete FROM user_documents;
+delete FROM feedback_documents;
+delete from tasks;
+delete from documet_repository;
+delete from client_details;
+delete from clients;
+delete from history;
+delete FROM user_detail;
+delete FROM users;
+delete from location_area;
+delete from location;
+delete from user_rewards;
+delete from task_client_points;
+delete from user_feedback;

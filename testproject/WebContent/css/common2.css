@@ -1,0 +1,71 @@
+/*
+-----------------------------------------------------
+FileName:    main.css
+Version:     06/07/2013
+Author:      Nilesh Hingu
+Email:       neil.hingu@gmail.com
+-----------------------------------------------------
+*/
+
+
+@import url("reset_html5.css");
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin,cyrillic-ext,latin-ext,cyrillic);
+
+
+
+/* FLOATS */
+.fltlft{ float:left;}
+.fltrt{ float:right;}
+.clrflt{ clear:both; line-height:1px; font-size:1px;}
+.clear{ clear:both;}
+
+
+/* CSS Document */
+body {font-family: 'PT Sans', sans-serif, Verdana, Arial; margin:0; padding:0; line-height:1.5em; font-size:14px; background:#000000 url(../images/pg-bg.jpg) no-repeat top center; text-align:left;}
+body { letter-spacing:0.01em\9; }
+
+a, a:link, a:active, a:visited { outline:none; font-weight:normal;}
+a:hover{ outline:none; font-weight:normal;}
+.clr {clear:both;}
+
+
+
+
+/*start--------------------------------------------------------------------------*/
+.hiddencol{display:none;}
+.viscol{display:block;}
+/*hide/visible column css end--------------------------------------------------------------------------*/ 
+
+ /*maincontainer css start--------------------------------------------------------------------------*/
+.maincontainer{font-family: 'PT Sans', sans-serif, Verdana, Arial; width:960px;/*968 */ /*height:575px;*/ margin:0 auto; padding:0 0; position:relative; background:#8d5824;} 
+
+
+.topband{width:969px; height:254px; padding:0 0; margin:0 0; background:url(../images/inner-top-bg.jpg) no-repeat top left;}
+.topbandclient{width:969px; height:254px; padding:0 0; margin:0 0; background:url(../images/inner-top-bg-client.jpg) no-repeat top left;}
+
+.logo{position:absolute; z-index:1; top:10px; left:10px; width:315px;}
+.logo img{float:left; border:none;}
+
+.urtitle{position:absolute; z-index:1; top:38px; left:350px; width:245px;}
+.urtitle img{float:left; border:none;}
+
+.nav{position:absolute; top:10px; right:50px; text-align:right;}
+.nav a{color:#FFC; padding:0 0; margin:0 0; text-decoration:none;}
+.nav a:hover{color:#ffffff; text-decoration:underline;}
+.nav img{ vertical-align:middle; padding:0 5px; margin:0 0; border:none;}
+
+.boy{position: absolute; top:66px; right:120px; z-index:1;}
+.girl{position: absolute; top:63px; right:140px; z-index:1;}
+
+.menu{position:absolute; top:254px; left:0; margin:0 0; padding:12px 0 0 0; width:960px; height:32px; background:url(../images/inner-menu-bg.jpg) repeat-x top left;}
+.menu a{padding:15px 0 0 25px!important; margin:0 0; color:#ffc; text-decoration:none; text-transform:uppercase; font-size:16px; font-weight:400;}
+.menu a:hover{color:#ffffff;}
+.menu div{float:right; text-align:right; margin:0 10px 0 0; color:#ffc; text-transform:uppercase; font-size:16px; font-weight:400;}
+.menu div img{vertical-align:middle;}
+
+
+.footer-area{font-family: 'PT Sans', sans-serif, Verdana, Arial; width:100%;/*968 */  margin:0 0; padding:10px 0; background:#000000; color:#ffffff; font-size:13px;}
+.footer-ca{width:929px; margin:0 auto; padding:0 20px;}
+.social-media{float:right; text-align:right;}
+.social-media a{padding:0 0; margin:0 0 0 5px;}
+

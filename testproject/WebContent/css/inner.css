@@ -1,0 +1,54 @@
+/*
+-----------------------------------------------------
+FileName:    index.css
+Version:     30/07/2013
+Author:      Nilesh Hingu
+Email:       nilesh@nileshhingu.com
+-----------------------------------------------------
+*/
+
+
+.imgband{width:959px; height:356px; padding:0 0; margin:0 0; position:absolute; top:160px; left:4px;}
+/*--Main Container--*/
+.main_view {float: left; position: relative;}
+
+/*--Window/Masking Styles--*/
+.window {height:356px; width: 959px; overflow: hidden; /*--Hides anything outside of the set width/height--*/ position: relative;}
+
+.image_reel  {position: absolute; top: 0; left: 0;}
+.image_reel img {float: left; text-align:center;}
+
+/*--Paging Styles--*/
+.paging {position: absolute; bottom: 25px; right: 10px; width: 110px; height:10px; z-index: 100; /*--Assures the paging stays on the top layer--*/ text-align: center; line-height: 20px;/*background: url(paging_bg2.png) no-repeat;*/ display: none; /*--Hidden by default, will be later shown with jQuery--*/}
+.paging a {padding: 2px 3px; text-decoration: none; color: #fff; background: none; border:none; }
+.paging a.active {font-weight: bold; background: none; border: none;}
+.paging a:hover {font-weight: bold;}
+
+
+
+.ca-area{width:960px; padding:0 0 30px 0; margin:0 5px; background:#ffffff;}
+.ca-area .col01{float:left; width:620px; padding:20px 20px 0 20px; margin:0 0; }
+.col01 h2{font-size:36px; color:#ff8a00; padding:0 0 20px 0; margin:0 0; font-weight:400;}
+.col01 h3{font-size:20px; color:#303030; padding:0 0 10px 0; margin:0 0; font-weight:400;}
+.col01 p{padding:0 0 20px 0; margin:0 0; font-weight:400; font-size:16px; color:#656565; line-height:22px;}
+.col01 p a{color:#ff8a00; text-decoration:none; padding:0 0; margin:0 0;}
+.col01 p a:hover{text-decoration:underline;}
+
+
+.ca-area .col02{float:left; width:300px; padding:20px 0; margin:0 0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
